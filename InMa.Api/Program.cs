@@ -22,4 +22,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/", () => Task.FromResult(Results.Ok("Hello World!")));
+
 app.Run();
