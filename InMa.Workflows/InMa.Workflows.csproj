@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.8" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.7.23375.6" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+        <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.0-preview.2.23153.2\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+      </Reference>
+      <Reference Include="Microsoft.AspNetCore.Http.Results">
+        <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.0-preview.2.23153.2\Microsoft.AspNetCore.Http.Results.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\InMa.Contracts\InMa.Contracts.csproj" />
+      <ProjectReference Include="..\InMa.DataAccess\InMa.DataAccess.csproj" />
+    </ItemGroup>
+
+</Project>
