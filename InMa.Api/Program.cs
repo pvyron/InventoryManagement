@@ -1,3 +1,5 @@
+using InMa.Api.Endpoints;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,6 +24,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapGet("/", () => Task.FromResult(Results.Ok("Hello World!")));
+app.MapGet("/", () => Results.Ok("Hello World!"));
+
+app.MapPost("/api/inventory", Endpoints.PostInventory);
 
 app.Run();
