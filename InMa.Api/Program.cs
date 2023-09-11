@@ -6,10 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<MasterDbContext>(optionsAction: options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("BloggingContext"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("InMaster"));
 });
 
-builder.Services.AddMediator();
+builder.Services.AddMediator(options =>
+{
+    options.ServiceLifetime = ServiceLifetime.Scoped;
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
