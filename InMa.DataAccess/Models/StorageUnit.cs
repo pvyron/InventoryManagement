@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 namespace InMa.DataAccess.Models;
 
 [PrimaryKey("Id")]
-public class ItemCategory
+public class StorageUnit
 {
     public Guid Id { get; set; }
     
-    [Length(1, 20)]
-    public required string ItemName { get; set; }
+    
+    [Length(1, 100)] 
+    public required string Name { get; set; }
 }

@@ -8,9 +8,11 @@ public sealed class MasterDbContext : DbContext
     public MasterDbContext(DbContextOptions<MasterDbContext> options) : base(options)
     {
         Items = Set<Item>();
-        ItemCategories = Set<ItemCategory>();
+        StorageUnits = Set<StorageUnit>();
+        Inventories = Set<Inventory>();
     }
 
     public DbSet<Item> Items { get; set; }
-    public DbSet<ItemCategory> ItemCategories { get; set; }
+    public DbSet<StorageUnit> StorageUnits { get; set; }
+    public DbSet<Inventory> Inventories { get; set; }
 }

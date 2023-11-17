@@ -1,4 +1,5 @@
 using InMa.Api.Endpoints;
+using InMa.Contracts.Inventory;
 using InMa.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,7 @@ app.MapControllers();
 
 app.MapGet("/", () => Results.Ok("Hello World!"));
 
-app.MapPost("/api/inventory", Endpoints.PostInventory);
+app.MapPost(EndpointRoutes.PostStorageCount, Endpoints.CountStorage);
+app.MapGet(EndpointRoutes.GetInventories, Endpoints.GetInventories);
 
 app.Run();
