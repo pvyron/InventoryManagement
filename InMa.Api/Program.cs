@@ -2,6 +2,7 @@ using InMa.Api.Endpoints;
 using InMa.Contracts.Inventory;
 using InMa.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Mediator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddDbContext<MasterDbContext>(optionsAction: options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("InMaster"));
 });
+
+
+
 
 builder.Services.AddMediator(options =>
 {

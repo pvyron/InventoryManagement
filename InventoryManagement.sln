@@ -1,16 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMa.Api", "InMa.Api\InMa.Api.csproj", "{BAD1FA5A-6DE4-4806-9233-2B17360EE6CF}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMa.Api", "InMa.Api\InMa.Api.csproj", "{BAD1FA5A-6DE4-4806-9233-2B17360EE6CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMa.Core", "InMa.Core\InMa.Core.csproj", "{8387A0CB-4E6E-4DAF-B984-9C98553EB5D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMa.Core", "InMa.Core\InMa.Core.csproj", "{8387A0CB-4E6E-4DAF-B984-9C98553EB5D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3DC93A50-679D-4427-B756-FD3458CDA054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMa.Contracts", "InMa.Contracts\InMa.Contracts.csproj", "{094AED2C-2205-4196-AF5E-AD3EE5E7DCBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMa.Contracts", "InMa.Contracts\InMa.Contracts.csproj", "{094AED2C-2205-4196-AF5E-AD3EE5E7DCBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMa.Workflows", "InMa.Workflows\InMa.Workflows.csproj", "{1081235A-7CBD-4525-B3FE-35F4E7E176E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMa.Workflows", "InMa.Workflows\InMa.Workflows.csproj", "{1081235A-7CBD-4525-B3FE-35F4E7E176E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMa.DataAccess", "InMa.DataAccess\InMa.DataAccess.csproj", "{D112813F-AA73-43C4-9ABA-732237286068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMa.DataAccess", "InMa.DataAccess\InMa.DataAccess.csproj", "{D112813F-AA73-43C4-9ABA-732237286068}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E4A9ED38-5D6D-4C38-BDCA-18B1E1C64EFC}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,7 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C71A7E3F-EC2D-4830-BD57-9E0D4CA635C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMa.Api.IntegrationTest", "InMa.Api.IntegrationTest\InMa.Api.IntegrationTest.csproj", "{40050E6B-0503-4046-A8BB-25E60D20856B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMa.Api.IntegrationTest", "InMa.Api.IntegrationTest\InMa.Api.IntegrationTest.csproj", "{40050E6B-0503-4046-A8BB-25E60D20856B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMa.Portal", "InMa.Portal\InMa.Portal.csproj", "{2F9ABDF7-6FFE-48DD-AC91-28717A450998}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +56,13 @@ Global
 		{40050E6B-0503-4046-A8BB-25E60D20856B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40050E6B-0503-4046-A8BB-25E60D20856B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40050E6B-0503-4046-A8BB-25E60D20856B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F9ABDF7-6FFE-48DD-AC91-28717A450998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9ABDF7-6FFE-48DD-AC91-28717A450998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F9ABDF7-6FFE-48DD-AC91-28717A450998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F9ABDF7-6FFE-48DD-AC91-28717A450998}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BAD1FA5A-6DE4-4806-9233-2B17360EE6CF} = {3DC93A50-679D-4427-B756-FD3458CDA054}
@@ -59,5 +71,6 @@ Global
 		{1081235A-7CBD-4525-B3FE-35F4E7E176E1} = {3DC93A50-679D-4427-B756-FD3458CDA054}
 		{D112813F-AA73-43C4-9ABA-732237286068} = {3DC93A50-679D-4427-B756-FD3458CDA054}
 		{40050E6B-0503-4046-A8BB-25E60D20856B} = {C71A7E3F-EC2D-4830-BD57-9E0D4CA635C6}
+		{2F9ABDF7-6FFE-48DD-AC91-28717A450998} = {3DC93A50-679D-4427-B756-FD3458CDA054}
 	EndGlobalSection
 EndGlobal

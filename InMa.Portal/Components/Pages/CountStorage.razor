@@ -1,0 +1,77 @@
+﻿@page "/storage/count"
+@rendermode InteractiveServer
+@inject ILogger<StorageCountModel> Logger
+
+<PageTitle>HAHAHA</PageTitle>
+
+<h1>Amazing</h1>
+
+
+<form method="post" @onsubmit="Submit" @formname="storagecountmodel-plain-form">
+    <AntiforgeryToken />
+    <InputText @bind-Value="Model!.StorageName" />
+    <button type="submit">Search</button>
+</form>
+
+<table class='table'>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        @if (Model!.StorageUnits!.Length <= 0)
+        {
+            <tr>
+                <td colspan="*">Loading...</td>
+            </tr>
+        }
+        
+        @foreach (var storageUnit in Model!.StorageUnits)
+        {
+            <tr>
+                <td>@storageUnit.StorageId.ToString()</td>
+                <td>@storageUnit.StorageName</td>
+                <td><button>Select</button></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+
+@code {
+    [SupplyParameterFromForm]
+    public StorageCountModel? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+    private void Submit()
+    {
+        if (string.IsNullOrWhiteSpace(Model!.StorageName))
+            return;
+
+        Model!.StorageUnits = new StorageUnit[]
+        {
+            new() { StorageId = Guid.NewGuid(), StorageName = "ena" },
+            new() { StorageId = Guid.NewGuid(), StorageName = "duo" },
+            new() { StorageId = Guid.NewGuid(), StorageName = Model!.StorageName! }
+        };
+    }
+
+    public class StorageCountModel
+    {
+        public Guid? StorageId { get; set; }
+        public string? StorageName{ get; set; }
+
+        public StorageUnit[] StorageUnits { get; set; } = Array.Empty<StorageUnit>();
+    }
+
+    public class StorageUnit
+    {
+        public Guid StorageId { get; set; }
+        public string StorageName { get; set; } = null!;
+    }
+}
