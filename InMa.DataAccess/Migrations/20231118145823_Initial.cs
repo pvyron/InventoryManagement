@@ -6,23 +6,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InMa.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class addinventory : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ItemCategories");
-
-            migrationBuilder.RenameColumn(
-                name: "ItemName",
-                table: "Items",
-                newName: "Name");
-
-            migrationBuilder.RenameColumn(
-                name: "ItemCategory",
-                table: "Items",
-                newName: "CategoryName");
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    CategoryName = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "StorageUnits",
@@ -75,29 +75,10 @@ namespace InMa.DataAccess.Migrations
                 name: "Inventories");
 
             migrationBuilder.DropTable(
+                name: "Items");
+
+            migrationBuilder.DropTable(
                 name: "StorageUnits");
-
-            migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "Items",
-                newName: "ItemName");
-
-            migrationBuilder.RenameColumn(
-                name: "CategoryName",
-                table: "Items",
-                newName: "ItemCategory");
-
-            migrationBuilder.CreateTable(
-                name: "ItemCategories",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ItemName = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItemCategories", x => x.Id);
-                });
         }
     }
 }

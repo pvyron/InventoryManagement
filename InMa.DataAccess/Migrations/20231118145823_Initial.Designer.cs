@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InMa.DataAccess.Migrations
 {
     [DbContext(typeof(MasterDbContext))]
-    [Migration("20231117220243_addinventory")]
-    partial class addinventory
+    [Migration("20231118145823_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

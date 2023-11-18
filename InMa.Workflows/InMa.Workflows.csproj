@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.11" />
+      <PackageReference Include="Mediator.Abstractions" Version="2.1.7" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
