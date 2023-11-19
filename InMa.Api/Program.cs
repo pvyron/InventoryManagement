@@ -41,7 +41,9 @@ app.MapControllers();
 
 app.MapGet("/", () => Results.Ok("Hello World!"));
 
-app.MapPost(EndpointRoutes.PostStorageCount, Endpoints.CountStorage);
 app.MapGet(EndpointRoutes.GetInventories, Endpoints.GetInventories);
+app.MapGet(EndpointRoutes.GetStorageUnits, Endpoints.GetStorageUnits);
+app.MapPost(EndpointRoutes.AddStorageUnit, Endpoints.AddStorageUnit);
+app.MapPost(EndpointRoutes.PostStorageCount, Endpoints.CountStorage);
 
 app.Run();

@@ -1,75 +1,112 @@
 ﻿@page "/storage/count"
-@rendermode InteractiveServer
-@inject ILogger<StorageCountModel> Logger
 
-<PageTitle>HAHAHA</PageTitle>
+<PageTitle>Storage Count</PageTitle>
 
 <h1>Amazing</h1>
+@if (!StorageId.HasValue)
+{
+    <h3>Choose storage unit</h3>
 
+    <form method="post" @onsubmit="Search" @formname="storagecountmodel-plain-form">
+        <AntiforgeryToken/>
+        <InputText @bind-Value="Model!.SearchStorageName"/>
+        <button type="submit">Search</button>
+        <a href="storage/add">
+            <button>New</button>
+        </a>
+    </form>
 
-<form method="post" @onsubmit="Submit" @formname="storagecountmodel-plain-form">
-    <AntiforgeryToken />
-    <InputText @bind-Value="Model!.StorageName" />
-    <button type="submit">Search</button>
-</form>
-
-<table class='table'>
+    <table class='table'>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-        
-        @if (Model!.StorageUnits!.Length <= 0)
+
+        @if ((SearchStorageUnits?.Length ?? 0) <= 0)
         {
             <tr>
                 <td colspan="*">Loading...</td>
             </tr>
         }
-        
-        @foreach (var storageUnit in Model!.StorageUnits)
+        else
         {
-            <tr>
-                <td>@storageUnit.StorageId.ToString()</td>
-                <td>@storageUnit.StorageName</td>
-                <td><button>Select</button></td>
-            </tr>
+            @foreach (var storageUnit in SearchStorageUnits!)
+            {
+                <tr>
+                    <td>@storageUnit.StorageId.ToString()</td>
+                    <td>@storageUnit.StorageName</td>
+                    <td>
+                        <a href="storage/count?storageId=@(storageUnit.StorageId.ToString())">
+                            <button >
+                                Select
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
         }
+
         </tbody>
     </table>
+}
+else
+{
+    <h3>
+        @Model?.SelectedStorage?.StorageName    
+    </h3>
+}
+
 
 
 @code {
     [SupplyParameterFromForm]
-    public StorageCountModel? Model { get; set; }
+    public CountStorageModel? Model { get; set; }
+    
+    [SupplyParameterFromQuery(Name = "storageId")]
+    public Guid? StorageId { get; set; }
 
-    protected override void OnInitialized() => Model ??= new();
+    public StorageUnitModel[] SearchStorageUnits { get; set; } = Array.Empty<StorageUnitModel>();
 
-    private void Submit()
+    protected override void OnInitialized()
     {
-        if (string.IsNullOrWhiteSpace(Model!.StorageName))
-            return;
+        Model ??= new();
 
-        Model!.StorageUnits = new StorageUnit[]
+        if (StorageId.HasValue)
+            Model.SelectedStorage = new()
+            {
+                StorageId = StorageId.Value,
+                StorageName = StorageId.Value.ToString()
+            };
+
+    }
+
+    private void Search()
+    {
+        if (Model!.SearchStorageName.Length < 2)
+            return;
+        
+        SearchStorageUnits = new[]
         {
-            new() { StorageId = Guid.NewGuid(), StorageName = "ena" },
-            new() { StorageId = Guid.NewGuid(), StorageName = "duo" },
-            new() { StorageId = Guid.NewGuid(), StorageName = Model!.StorageName! }
+            new StorageUnitModel()
+            {
+                StorageId = Guid.NewGuid(),
+                StorageName = Model!.SearchStorageName
+            }
         };
     }
 
-    public class StorageCountModel
+    public class CountStorageModel
     {
-        public Guid? StorageId { get; set; }
-        public string? StorageName{ get; set; }
-
-        public StorageUnit[] StorageUnits { get; set; } = Array.Empty<StorageUnit>();
+        public string SearchStorageName { get; set; } = "";
+        
+        public StorageUnitModel? SelectedStorage { get; set; }
     }
 
-    public class StorageUnit
+    public class StorageUnitModel
     {
         public Guid StorageId { get; set; }
         public string StorageName { get; set; } = null!;
