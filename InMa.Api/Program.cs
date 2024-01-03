@@ -1,5 +1,6 @@
 using InMa.Api.Endpoints;
 using InMa.Contracts.Inventory;
+using InMa.Contracts.Items;
 using InMa.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,9 +41,11 @@ app.MapControllers();
 
 app.MapGet("/", () => Results.Ok("Hello World!"));
 
-app.MapGet(EndpointRoutes.GetInventories, Endpoints.GetInventories);
-app.MapGet(EndpointRoutes.GetStorageUnits, Endpoints.GetStorageUnits);
-app.MapPost(EndpointRoutes.AddStorageUnit, Endpoints.AddStorageUnit);
-app.MapPost(EndpointRoutes.PostStorageCount, Endpoints.CountStorage);
+app.MapGet(InventoryEndpointRoutes.GetInventories, Endpoints.GetInventories);
+app.MapGet(InventoryEndpointRoutes.GetStorageUnits, Endpoints.GetStorageUnits);
+app.MapPost(InventoryEndpointRoutes.AddStorageUnit, Endpoints.AddStorageUnit);
+app.MapPost(InventoryEndpointRoutes.PostStorageCount, Endpoints.CountStorage);
+
+app.MapPost(ItemEndpointRoutes.Create, Items.Create);
 
 app.Run();

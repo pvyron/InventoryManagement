@@ -31,7 +31,7 @@ public sealed class CountStorageHandler(MasterDbContext dbContext) : IRequestHan
             detail.ItemId ??= dbContext.Items.Add(new Item
             {
                 Name = detail.ItemName,
-                CategoryName = detail.ItemCategory
+                CategoryName = detail.ItemCategory,
             }).Entity.Id;
 
             var item = await dbContext.Items.FindAsync(detail.ItemId);

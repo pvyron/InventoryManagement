@@ -1,4 +1,5 @@
 ﻿using InMa.Contracts.Inventory;
+using InMa.Contracts.Items;
 using InMa.Workflows.Inventory;
 using Mediator;
 using Microsoft.AspNetCore.Mvc;

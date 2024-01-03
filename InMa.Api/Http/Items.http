@@ -1,0 +1,7 @@
+﻿POST https://localhost:/api/Items
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}
