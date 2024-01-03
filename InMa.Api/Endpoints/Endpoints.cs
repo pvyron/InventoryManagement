@@ -1,7 +1,6 @@
 ﻿using InMa.Contracts.Inventory;
 using InMa.Workflows.Inventory;
 using Mediator;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InMa.Api.Endpoints;
@@ -38,7 +37,7 @@ public static class Endpoints
         [FromServices] ILoggerFactory loggerFactory,
         CancellationToken cancellationToken)
     {
-        return Results.Created();
+        return await ValueTask.FromResult(Results.Created());
     }
 
     public static async ValueTask<IResult> GetStorageUnits(
@@ -47,6 +46,6 @@ public static class Endpoints
         [FromServices] ILoggerFactory loggerFactory,
         CancellationToken cancellationToken)
     {
-        return Results.Ok();
+        return await ValueTask.FromResult(Results.Ok());
     }
 }

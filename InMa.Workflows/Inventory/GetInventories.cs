@@ -1,5 +1,4 @@
 ﻿using InMa.DataAccess;
-using InMa.DataAccess.Models;
 using Mediator;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
