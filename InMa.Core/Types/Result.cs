@@ -27,3 +27,25 @@ public class Result<T>
     public static explicit operator Result<T>(T success) => new(success);
     public static explicit operator Result<T>(string errorMessage) => new(errorMessage);
 }
+public class Result
+{
+    private readonly string _errorMessage;
+
+    public Result()
+    {
+        _errorMessage = string.Empty;
+        IsSuccess = true;
+    }
+
+    public Result(string errorMessage)
+    {
+        _errorMessage = errorMessage;
+        IsSuccess = false;
+    }
+
+    public string GetError() => _errorMessage;
+
+    public bool IsSuccess { get; }
+
+    public static explicit operator Result(string errorMessage) => new(errorMessage);
+}
