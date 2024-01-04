@@ -15,23 +15,23 @@ public sealed class ItemsService : IItemsService
         _dbContext = dbContext;
     }
     
-    public async ValueTask<Result<List<CreatedItemData>>> CreateItems(CreateItemData[] createItemsData, CancellationToken cancellationToken)
+    public async ValueTask<ServiceActionResult<List<CreatedItemData>>> CreateItems(CreateItemData[] createItemsData, CancellationToken cancellationToken)
     {
         if (createItemsData.GroupBy(i => i.Name).Any(ig => ig.Count() > 1))
-            return (Result<List<CreatedItemData>>)"One or more items have the same name!";
+            return (ServiceActionResult<List<CreatedItemData>>)"One or more items have the same name!";
         
         var createdItems = new List<CreatedItemData>();
 
-        foreach (var itemRequestModel in createItemsData)
+        foreach (var createItemData in createItemsData)
         {
-            if (await _dbContext.Items.AsNoTracking().AnyAsync(i => i.Name == itemRequestModel.Name, cancellationToken))
-                return new Result<List<CreatedItemData>>($"Item with name {itemRequestModel.Name} already exists!");
+            if (await _dbContext.Items.AsNoTracking().AnyAsync(i => i.Name == createItemData.Name, cancellationToken))
+                return new ServiceActionResult<List<CreatedItemData>>($"Item with name {createItemData.Name} already exists!");
 
-            var createdItem = _dbContext.Items.Add(new Item
+            var createdItem = _dbContext.Items.Add(new ItemDbModel
             {
                 Id = Guid.NewGuid(),
-                Name = itemRequestModel.Name,
-                CategoryName = itemRequestModel.CategoryName
+                Name = createItemData.Name,
+                CategoryName = createItemData.CategoryName
             }).Entity;
 
             createdItems.Add(new CreatedItemData(
@@ -43,6 +43,6 @@ public sealed class ItemsService : IItemsService
 
         await _dbContext.SaveChangesAsync(cancellationToken);
 
-        return new Result<List<CreatedItemData>>(createdItems);
+        return new ServiceActionResult<List<CreatedItemData>>(createdItems);
     }
 }

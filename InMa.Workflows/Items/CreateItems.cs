@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Http;
 
 namespace InMa.Workflows.Items;
 
-public sealed record CreateItem(CreateItemRequestModel[]? RequestModel) : IRequest<IResult>;
+public sealed record CreateItemsCommand(CreateItemRequestModel[]? RequestModel) : IRequest<IResult>;
 
-public sealed class CreateItemHandler : IRequestHandler<CreateItem, IResult>
+public sealed class CreateItemsCommandHandler : IRequestHandler<CreateItemsCommand, IResult>
 {
     private readonly IItemsService _itemsService;
 
-    public CreateItemHandler(IItemsService itemsService)
+    public CreateItemsCommandHandler(IItemsService itemsService)
     {
         _itemsService = itemsService;
     }
     
-    public async ValueTask<IResult> Handle(CreateItem request, CancellationToken cancellationToken)
+    public async ValueTask<IResult> Handle(CreateItemsCommand request, CancellationToken cancellationToken)
     {
         try
         {

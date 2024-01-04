@@ -14,7 +14,7 @@ public static class Items
         [FromServices] ILoggerFactory loggerFactory,
         CancellationToken cancellationToken)
     {
-        return await mediator.Send(new GetItems(id, name), cancellationToken);
+        return await mediator.Send(new GetItemsQuery(id, name), cancellationToken);
     }
     
     public static async ValueTask<IResult> Create(
@@ -23,7 +23,7 @@ public static class Items
         [FromServices] ILoggerFactory loggerFactory,
         CancellationToken cancellationToken)
     {
-        return await mediator.Send(new CreateItem(createItemRequestModel), cancellationToken);
+        return await mediator.Send(new CreateItemsCommand(createItemRequestModel), cancellationToken);
     }
     
     public static async ValueTask<IResult> Update(
@@ -33,7 +33,7 @@ public static class Items
         [FromServices] ILoggerFactory loggerFactory,
         CancellationToken cancellationToken)
     {
-        return await mediator.Send(new UpdateItem(id, createItemRequestModel), cancellationToken);
+        return await mediator.Send(new UpdateItemCommand(id, createItemRequestModel), cancellationToken);
     }
     
     public static async ValueTask<IResult> Delete(
@@ -42,6 +42,6 @@ public static class Items
         [FromServices] ILoggerFactory loggerFactory,
         CancellationToken cancellationToken)
     {
-        return await mediator.Send(new DeleteItem(id), cancellationToken);
+        return await mediator.Send(new DeleteItemCommand(id), cancellationToken);
     }
 }

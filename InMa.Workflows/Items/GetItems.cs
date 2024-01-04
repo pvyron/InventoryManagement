@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InMa.Workflows.Items;
 
-public sealed record GetItems(Guid? Id, string? name) : IRequest<IResult>;
+public sealed record GetItemsQuery(Guid? Id, string? Name) : IRequest<IResult>;
 
-public sealed class GetItemsHandler : IRequestHandler<GetItems, IResult>
+public sealed class GetItemsQueryHandler : IRequestHandler<GetItemsQuery, IResult>
 {
     private readonly MasterDbContext _dbContext;
 
-    public GetItemsHandler(MasterDbContext dbContext)
+    public GetItemsQueryHandler(MasterDbContext dbContext)
     {
         _dbContext = dbContext;
     }
     
-    public async ValueTask<IResult> Handle(GetItems request, CancellationToken cancellationToken)
+    public async ValueTask<IResult> Handle(GetItemsQuery request, CancellationToken cancellationToken)
     {
         try
         {
@@ -31,9 +31,9 @@ public sealed class GetItemsHandler : IRequestHandler<GetItems, IResult>
                 return Results.Ok(new FetchedItemResponseModel(item.Id, item.Name, item.CategoryName, item.CreateDate));
             }
 
-            if (request.name is not null)
+            if (request.Name is not null)
             {
-                var item = await _dbContext.Items.AsNoTracking().FirstOrDefaultAsync(i => i.Name == request.name,
+                var item = await _dbContext.Items.AsNoTracking().FirstOrDefaultAsync(i => i.Name == request.Name,
                     cancellationToken: cancellationToken);
 
                 if (item is null)

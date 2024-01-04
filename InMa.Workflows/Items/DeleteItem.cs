@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.Http;
 
 namespace InMa.Workflows.Items;
 
-public sealed record DeleteItem(Guid Id) : IRequest<IResult>;
+public sealed record DeleteItemCommand(Guid Id) : IRequest<IResult>;
 
-public sealed class DeleteItemHandler : IRequestHandler<DeleteItem, IResult>
+public sealed class DeleteItemCommandHandler : IRequestHandler<DeleteItemCommand, IResult>
 {
     private readonly MasterDbContext _dbContext;
 
-    public DeleteItemHandler(MasterDbContext dbContext)
+    public DeleteItemCommandHandler(MasterDbContext dbContext)
     {
         _dbContext = dbContext;
     }
     
-    public async ValueTask<IResult> Handle(DeleteItem request, CancellationToken cancellationToken)
+    public async ValueTask<IResult> Handle(DeleteItemCommand request, CancellationToken cancellationToken)
     {
         try
         {

@@ -1,18 +1,18 @@
 ﻿namespace InMa.Core.Types;
 
-public class Result<T>
+public class ServiceActionResult<T>
 {
     private readonly string _errorMessage;
     private readonly T? _success;
 
-    public Result(T success)
+    public ServiceActionResult(T success)
     {
         _errorMessage = string.Empty;
         _success = success;
         IsSuccess = true;
     }
 
-    public Result(string errorMessage)
+    public ServiceActionResult(string errorMessage)
     {
         _success = default;
         _errorMessage = errorMessage;
@@ -24,20 +24,20 @@ public class Result<T>
 
     public bool IsSuccess { get; }
 
-    public static explicit operator Result<T>(T success) => new(success);
-    public static explicit operator Result<T>(string errorMessage) => new(errorMessage);
+    public static explicit operator ServiceActionResult<T>(T success) => new(success);
+    public static explicit operator ServiceActionResult<T>(string errorMessage) => new(errorMessage);
 }
-public class Result
+public class ServiceActionResult
 {
     private readonly string _errorMessage;
 
-    public Result()
+    public ServiceActionResult()
     {
         _errorMessage = string.Empty;
         IsSuccess = true;
     }
 
-    public Result(string errorMessage)
+    public ServiceActionResult(string errorMessage)
     {
         _errorMessage = errorMessage;
         IsSuccess = false;
@@ -47,5 +47,5 @@ public class Result
 
     public bool IsSuccess { get; }
 
-    public static explicit operator Result(string errorMessage) => new(errorMessage);
+    public static explicit operator ServiceActionResult(string errorMessage) => new(errorMessage);
 }

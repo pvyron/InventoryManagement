@@ -28,7 +28,7 @@ public sealed class CountStorageHandler(MasterDbContext dbContext) : IRequestHan
         
         foreach (var detail in request.Dto.Items)
         {
-            detail.ItemId ??= dbContext.Items.Add(new Item
+            detail.ItemId ??= dbContext.Items.Add(new ItemDbModel
             {
                 Name = detail.ItemName,
                 CategoryName = detail.ItemCategory

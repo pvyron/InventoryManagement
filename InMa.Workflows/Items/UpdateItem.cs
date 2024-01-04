@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InMa.Workflows.Items;
 
-public sealed record UpdateItem(Guid Id, UpdateItemRequestModel RequestModel) : IRequest<IResult>;
+public sealed record UpdateItemCommand(Guid Id, UpdateItemRequestModel RequestModel) : IRequest<IResult>;
 
-public sealed class UpdateItemHandler : IRequestHandler<UpdateItem, IResult>
+public sealed class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, IResult>
 {
     private readonly MasterDbContext _dbContext;
 
-    public UpdateItemHandler(MasterDbContext dbContext)
+    public UpdateItemCommandHandler(MasterDbContext dbContext)
     {
         _dbContext = dbContext;
     }
     
-    public async ValueTask<IResult> Handle(UpdateItem request, CancellationToken cancellationToken)
+    public async ValueTask<IResult> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
     {
         try
         {

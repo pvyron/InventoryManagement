@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace InMa.DataAccess.Models;
 
 [PrimaryKey(nameof(Id))]
 [Index(nameof(Name), IsUnique = true)]
-public class Item
+[Table("Items")]
+public class ItemDbModel
 {
     public Guid Id { get; set; }
     
