@@ -34,6 +34,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\InMa.Contracts\InMa.Contracts.csproj" />
+      <ProjectReference Include="..\InMa.Logic\InMa.Logic.csproj" />
       <ProjectReference Include="..\InMa.Workflows\InMa.Workflows.csproj" />
     </ItemGroup>
 

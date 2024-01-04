@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\InMa.Abstractions\InMa.Abstractions.csproj" />
       <ProjectReference Include="..\InMa.Contracts\InMa.Contracts.csproj" />
       <ProjectReference Include="..\InMa.DataAccess\InMa.DataAccess.csproj" />
     </ItemGroup>
