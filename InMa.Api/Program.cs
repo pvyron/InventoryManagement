@@ -48,7 +48,7 @@ app.MapPost(InventoryEndpointRoutes.PostStorageCount, Endpoints.CountStorage);
 
 app.MapGet(ItemEndpointRoutes.Get, Items.Get);
 app.MapPost(ItemEndpointRoutes.Create, Items.Create);
-app.MapPut(ItemEndpointRoutes.Update, () => Results.Ok());
-app.MapDelete(ItemEndpointRoutes.Delete, () => Results.Ok());
+app.MapPut(ItemEndpointRoutes.Update, Items.Update);
+app.MapDelete(ItemEndpointRoutes.Delete, Items.Delete);
 
 app.Run();

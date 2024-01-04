@@ -33,7 +33,7 @@ public sealed class GetItemsHandler : IRequestHandler<GetItems, IResult>
 
             if (request.name is not null)
             {
-                var item = await _dbContext.Items.FirstOrDefaultAsync(i => i.Name == request.name,
+                var item = await _dbContext.Items.AsNoTracking().FirstOrDefaultAsync(i => i.Name == request.name,
                     cancellationToken: cancellationToken);
 
                 if (item is null)
@@ -43,6 +43,7 @@ public sealed class GetItemsHandler : IRequestHandler<GetItems, IResult>
             }
 
             var items = await _dbContext.Items
+                .AsNoTracking()
                 .Select(i => new FetchedItemResponseModel(i.Id, i.Name, i.CategoryName, i.CreateDate))
                 .ToListAsync(cancellationToken);
 

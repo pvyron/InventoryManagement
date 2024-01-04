@@ -24,7 +24,7 @@ public sealed class ItemsService : IItemsService
 
         foreach (var itemRequestModel in createItemsData)
         {
-            if (await _dbContext.Items.AnyAsync(i => i.Name == itemRequestModel.Name, cancellationToken))
+            if (await _dbContext.Items.AsNoTracking().AnyAsync(i => i.Name == itemRequestModel.Name, cancellationToken))
                 return new Result<List<CreatedItemData>>($"Item with name {itemRequestModel.Name} already exists!");
 
             var createdItem = _dbContext.Items.Add(new Item

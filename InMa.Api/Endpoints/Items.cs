@@ -1,6 +1,7 @@
 ﻿using InMa.Contracts.Items;
 using InMa.Workflows.Items;
 using Mediator;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InMa.Api.Endpoints;
@@ -24,5 +25,24 @@ public static class Items
         CancellationToken cancellationToken)
     {
         return await mediator.Send(new CreateItem(createItemRequestModel), cancellationToken);
+    }
+    
+    public static async ValueTask<IResult> Update(
+        [FromRoute] Guid id,
+        [FromBody] UpdateItemRequestModel createItemRequestModel,
+        [FromServices] IMediator mediator,
+        [FromServices] ILoggerFactory loggerFactory,
+        CancellationToken cancellationToken)
+    {
+        return await mediator.Send(new UpdateItem(id, createItemRequestModel), cancellationToken);
+    }
+    
+    public static async ValueTask<IResult> Delete(
+        [FromRoute] Guid id,
+        [FromServices] IMediator mediator,
+        [FromServices] ILoggerFactory loggerFactory,
+        CancellationToken cancellationToken)
+    {
+        return await mediator.Send(new DeleteItem(id), cancellationToken);
     }
 }
