@@ -31,7 +31,7 @@ public sealed class ItemsService : IItemsService
             {
                 Id = Guid.NewGuid(),
                 Name = itemRequestModel.Name,
-                CategoryName = itemRequestModel.CategoryName,
+                CategoryName = itemRequestModel.CategoryName
             }).Entity;
 
             createdItems.Add(new CreatedItemData(

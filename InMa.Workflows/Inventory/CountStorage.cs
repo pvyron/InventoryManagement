@@ -18,7 +18,7 @@ public sealed class CountStorageHandler(MasterDbContext dbContext) : IRequestHan
             Name = request.Dto.StorageUnitName
         }).Entity.Id;
 
-        var storageUnit = await dbContext.StorageUnits.FindAsync(request.Dto.StorageUnitId!);
+        var storageUnit = await dbContext.StorageUnits.FindAsync([request.Dto.StorageUnitId!], cancellationToken);
 
         await foreach (var inventory in dbContext.Inventories.Where(i => i.StorageUnitId == storageUnit!.Id)
                            .AsAsyncEnumerable().WithCancellation(cancellationToken))
@@ -31,12 +31,12 @@ public sealed class CountStorageHandler(MasterDbContext dbContext) : IRequestHan
             detail.ItemId ??= dbContext.Items.Add(new Item
             {
                 Name = detail.ItemName,
-                CategoryName = detail.ItemCategory,
+                CategoryName = detail.ItemCategory
             }).Entity.Id;
 
-            var item = await dbContext.Items.FindAsync(detail.ItemId);
+            var item = await dbContext.Items.FindAsync([detail.ItemId], cancellationToken);
 
-            var inventory = await dbContext.Inventories.FindAsync(storageUnit!.Id, item!.Id) ?? dbContext.Inventories.Add(new DataAccess.Models.Inventory
+            var inventory = await dbContext.Inventories.FindAsync([storageUnit!.Id, item!.Id], cancellationToken) ?? dbContext.Inventories.Add(new DataAccess.Models.Inventory
             {
                 ItemId = item.Id,
                 StorageUnitId = storageUnit.Id
