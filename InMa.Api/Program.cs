@@ -8,11 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<MasterDbContext>(optionsAction: options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("InMaster"));
-});
-builder.Services.AddScoped<IMasterDbContext>(provider => provider.GetService<MasterDbContext>()!);
+builder.AddMasterDbContext();
 
 builder.Services.AddMediator(options =>
 {
@@ -24,7 +20,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IItemsService, ItemsService>();
-
 
 var app = builder.Build();
 
