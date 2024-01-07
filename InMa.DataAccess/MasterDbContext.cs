@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InMa.DataAccess;
 
-public sealed class MasterDbContext : DbContext
+public sealed class MasterDbContext : DbContext, IMasterDbContext
 {
     public MasterDbContext(DbContextOptions<MasterDbContext> options) : base(options)
     {

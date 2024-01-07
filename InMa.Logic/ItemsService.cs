@@ -8,9 +8,9 @@ namespace InMa.Logic;
 
 public sealed class ItemsService : IItemsService
 {
-    private readonly MasterDbContext _dbContext;
+    private readonly IMasterDbContext _dbContext;
 
-    public ItemsService(MasterDbContext dbContext)
+    public ItemsService(IMasterDbContext dbContext)
     {
         _dbContext = dbContext;
     }

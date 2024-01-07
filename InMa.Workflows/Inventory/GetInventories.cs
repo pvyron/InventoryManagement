@@ -7,7 +7,7 @@ namespace InMa.Workflows.Inventory;
 
 public sealed record GetInventories(Guid? Storageid, Guid? Itemid): IRequest<IResult>;
 
-public sealed class GetInventoriesHandler(MasterDbContext dbContext) : IRequestHandler<GetInventories, IResult>
+public sealed class GetInventoriesHandler(IMasterDbContext dbContext) : IRequestHandler<GetInventories, IResult>
 {
     public async ValueTask<IResult> Handle(GetInventories request, CancellationToken cancellationToken)
     {

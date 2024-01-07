@@ -12,6 +12,7 @@ builder.Services.AddDbContext<MasterDbContext>(optionsAction: options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("InMaster"));
 });
+builder.Services.AddScoped<IMasterDbContext>(provider => provider.GetService<MasterDbContext>()!);
 
 builder.Services.AddMediator(options =>
 {

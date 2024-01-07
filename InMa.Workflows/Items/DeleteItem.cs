@@ -8,9 +8,9 @@ public sealed record DeleteItemCommand(Guid Id) : IRequest<IResult>;
 
 public sealed class DeleteItemCommandHandler : IRequestHandler<DeleteItemCommand, IResult>
 {
-    private readonly MasterDbContext _dbContext;
+    private readonly IMasterDbContext _dbContext;
 
-    public DeleteItemCommandHandler(MasterDbContext dbContext)
+    public DeleteItemCommandHandler(IMasterDbContext dbContext)
     {
         _dbContext = dbContext;
     }

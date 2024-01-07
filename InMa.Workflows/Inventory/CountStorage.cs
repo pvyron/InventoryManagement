@@ -9,7 +9,7 @@ namespace InMa.Workflows.Inventory;
 
 public sealed record CountStorageRequest(CountStorageRequestDto Dto) : IRequest<IResult>;
 
-public sealed class CountStorageHandler(MasterDbContext dbContext) : IRequestHandler<CountStorageRequest, IResult>
+public sealed class CountStorageHandler(IMasterDbContext dbContext) : IRequestHandler<CountStorageRequest, IResult>
 {
     public async ValueTask<IResult> Handle(CountStorageRequest request, CancellationToken cancellationToken)
     {

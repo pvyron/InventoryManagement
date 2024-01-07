@@ -10,9 +10,9 @@ public sealed record GetItemsQuery(Guid? Id, string? Name) : IRequest<IResult>;
 
 public sealed class GetItemsQueryHandler : IRequestHandler<GetItemsQuery, IResult>
 {
-    private readonly MasterDbContext _dbContext;
+    private readonly IMasterDbContext _dbContext;
 
-    public GetItemsQueryHandler(MasterDbContext dbContext)
+    public GetItemsQueryHandler(IMasterDbContext dbContext)
     {
         _dbContext = dbContext;
     }

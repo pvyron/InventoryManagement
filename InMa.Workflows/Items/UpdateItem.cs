@@ -10,9 +10,9 @@ public sealed record UpdateItemCommand(Guid Id, UpdateItemRequestModel RequestMo
 
 public sealed class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, IResult>
 {
-    private readonly MasterDbContext _dbContext;
+    private readonly IMasterDbContext _dbContext;
 
-    public UpdateItemCommandHandler(MasterDbContext dbContext)
+    public UpdateItemCommandHandler(IMasterDbContext dbContext)
     {
         _dbContext = dbContext;
     }
