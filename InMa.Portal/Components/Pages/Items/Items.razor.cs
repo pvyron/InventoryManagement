@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
 
-namespace InMa.Portal.Components.Pages;
+namespace InMa.Portal.Components.Pages.Items;
 
 public partial class Items
 {

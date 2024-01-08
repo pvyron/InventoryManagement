@@ -1,5 +1,6 @@
 using Microsoft.FluentUI.AspNetCore.Components;
 using InMa.Portal.Components;
+using InMa.Portal.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddFluentUIComponents();
+builder.Services.AddSingleton<ItemsService>();
+builder.Services.AddHttpClient<ItemsService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ExternalUrls:InMa:Api")!);
+});
 
 var app = builder.Build();
 

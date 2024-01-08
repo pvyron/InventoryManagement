@@ -3,6 +3,7 @@ using System;
 using InMa.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InMa.DataAccess.Migrations
 {
     [DbContext(typeof(MasterDbContext))]
-    partial class MasterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240108010853_contraints")]
+    partial class contraints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace InMa.DataAccess.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("Inventories", (string)null);
+                    b.ToTable("Inventories");
                 });
 
             modelBuilder.Entity("InMa.DataAccess.Models.ItemDbModel", b =>
@@ -67,7 +70,7 @@ namespace InMa.DataAccess.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("InMa.DataAccess.Models.StorageUnit", b =>
@@ -82,7 +85,7 @@ namespace InMa.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StorageUnits", (string)null);
+                    b.ToTable("StorageUnits");
                 });
 
             modelBuilder.Entity("InMa.DataAccess.Models.Inventory", b =>

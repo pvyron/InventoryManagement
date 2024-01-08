@@ -1,4 +1,6 @@
-﻿namespace InMa.Contracts.Items;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace InMa.Contracts.Items;
 
 public sealed record CreateItemRequestModel(string Name, string CategoryName);
     
