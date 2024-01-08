@@ -24,6 +24,12 @@ public sealed class ItemsService : IItemsService
 
         foreach (var createItemData in createItemsData)
         {
+            if (createItemData.Name.Length < 5)
+                return new ServiceActionResult<List<CreatedItemData>>($"Item name needs to be at least 5 characters long!");
+            
+            if (string.IsNullOrWhiteSpace(createItemData.CategoryName))
+                return new ServiceActionResult<List<CreatedItemData>>($"Item category can't be empty!");
+            
             if (await _dbContext.Items.AsNoTracking().AnyAsync(i => i.Name == createItemData.Name, cancellationToken))
                 return new ServiceActionResult<List<CreatedItemData>>($"Item with name {createItemData.Name} already exists!");
 

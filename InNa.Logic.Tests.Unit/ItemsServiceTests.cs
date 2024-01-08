@@ -88,4 +88,44 @@ public class ItemsServiceTests
         Assert.False(result.IsSuccess);
         Assert.Equal($"Item with name {name} already exists!", result.GetError());
     }
+
+    [Fact]
+    public async Task CreateItemWithSmallNameReturnsError()
+    {
+        // Arrange
+        var name = _faker.Random.Utf16String(0, 4);
+        var category = _faker.Random.Utf16String(1, 20);
+        
+        var newItemsData = new[]
+        {
+            new CreateItemData(name, category),
+        };
+        
+        // Act
+        var result = await _itemsService.CreateItems(newItemsData, CancellationToken.None);
+
+        // Assert
+        Assert.False(result.IsSuccess);
+        Assert.Equal($"Item name needs to be at least 5 characters long!", result.GetError());
+    }
+
+    [Fact]
+    public async Task CreateItemWithNoCategoryNameReturnsError()
+    {
+        // Arrange
+        var name = _faker.Random.Utf16String(5, 100);
+        var category = string.Empty;
+        
+        var newItemsData = new[]
+        {
+            new CreateItemData(name, category),
+        };
+        
+        // Act
+        var result = await _itemsService.CreateItems(newItemsData, CancellationToken.None);
+
+        // Assert
+        Assert.False(result.IsSuccess);
+        Assert.Equal($"Item category can't be empty!", result.GetError());
+    }
 }
