@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+
 <FluentLayout>
     <FluentHeader>
         Vyron's Inventory Management
@@ -7,6 +8,7 @@
         <NavMenu/>
         <FluentBodyContent>
             <div class="content">
+                <FluentMessageBarProvider @rendermode="InteractiveServer" Section="MESSAGES_TOP"/>
                 @Body
             </div>
         </FluentBodyContent>
@@ -20,6 +22,10 @@
         </div>
     </FluentFooter>
 </FluentLayout>
+
+<FluentDialogProvider @rendermode="InteractiveServer" />
+<FluentTooltipProvider @rendermode="InteractiveServer" />
+<FluentToastProvider @rendermode="InteractiveServer" MaxToastCount="10" />
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.

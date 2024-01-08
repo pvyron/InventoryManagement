@@ -1,28 +1,51 @@
 ﻿using InMa.Contracts.Items;
 using InMa.Portal.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 namespace InMa.Portal.Components.Pages.Items;
 
 public partial class AddItem
 {
-    [Inject] private ItemsService ItemsService { get; set; }
+    [Inject] private IMessageService MessageService { get; set; } = null!;
+    [Inject] private IDialogService DialogService { get; set; } = null!;
+    [Inject] private ItemsService ItemsService { get; set; } = null!;
+    
     private string NewItemName { get; set; } = "";
     private string NewItemCategory { get; set; } = "";
-    
-    public async void OnAdd()
+    private bool CallingApi { get; set; } = false;
+
+    private async Task OnAdd(MouseEventArgs args)
     {
         try
         {
-            var pew = await ItemsService.CreateItem(new CreateItemRequestModel(Name: NewItemName, CategoryName: NewItemCategory));
-            Console.WriteLine(pew.IsSuccess);
+            CallingApi = true;
+            
+            var result =
+                await ItemsService.CreateItem(new CreateItemRequestModel(Name: NewItemName,
+                    CategoryName: NewItemCategory));
 
-            var line = pew.IsSuccess ? pew.GetResult()!.ToString() : pew.GetError();
-            Console.WriteLine(line);
+            var message = result.IsSuccess
+                ? $"Item {result.GetResult()!.Name} was successfully created"
+                : result.GetError();
+
+            var dialog = result.IsSuccess
+                ? await DialogService.ShowSuccessAsync(message)
+                : await DialogService.ShowErrorAsync(message);
+
+            await dialog.Result;
+            
+            NewItemName = string.Empty;
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            var dialog = await DialogService.ShowWarningAsync(e.Message);
+            await dialog.Result;
+        }
+        finally
+        {
+            CallingApi = false;
         }
     }
 }

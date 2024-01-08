@@ -2,7 +2,6 @@
 @rendermode InteractiveServer
 
 <PageTitle>Items</PageTitle>
-
 <FluentCard Width="400px">
     <FluentGrid Spacing="3" Justify="JustifyContent.FlexEnd">
         <FluentGridItem xs="12" Justify="JustifyContent.Center">
@@ -15,7 +14,7 @@
             <FluentTextField @bind-Value=@NewItemCategory style="width: 100%;" Label="Category"></FluentTextField>
         </FluentGridItem>
         <FluentGridItem xs="4">
-            <FluentButton Appearance="Appearance.Accent" OnClick="@OnAdd" style="width: 100%;">Add</FluentButton>
+            <FluentButton Appearance="Appearance.Accent" OnClick="@OnAdd" Loading="@CallingApi" style="width: 100%;">Add</FluentButton>
         </FluentGridItem>
     </FluentGrid>
     

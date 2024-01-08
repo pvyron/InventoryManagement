@@ -14,30 +14,28 @@ public sealed class ItemsService
 
     public async ValueTask<ServiceActionResult<FetchedItemResponseModel[]>> GetItems()
     {
-        
-            HttpRequestMessage request = new(HttpMethod.Get, "/api/items");
+        HttpRequestMessage request = new(HttpMethod.Get, "/api/items");
 
-            var response = await _httpClient.SendAsync(request);
+        var response = await _httpClient.SendAsync(request);
 
-            if (!response.IsSuccessStatusCode)
-                return new ServiceActionResult<FetchedItemResponseModel[]>(await response.Content.ReadAsStringAsync());
+        if (!response.IsSuccessStatusCode)
+            return new ServiceActionResult<FetchedItemResponseModel[]>(
+                (await response.Content.ReadFromJsonAsync<string>())!);
 
-            try
-            {
-                var items = await response.Content.ReadFromJsonAsync<FetchedItemResponseModel[]>();
-                
-                if (items is null)
-                    return new ServiceActionResult<FetchedItemResponseModel[]>("Failed to deserialize");
+        try
+        {
+            var items = await response.Content.ReadFromJsonAsync<FetchedItemResponseModel[]>();
 
-                return new ServiceActionResult<FetchedItemResponseModel[]>(items);
-            }
-            catch (Exception ex)
-            {
-                return new ServiceActionResult<FetchedItemResponseModel[]>(await response.Content.ReadAsStringAsync());
-            }
+            if (items is null)
+                return new ServiceActionResult<FetchedItemResponseModel[]>("Failed to deserialize");
 
-            
-        
+            return new ServiceActionResult<FetchedItemResponseModel[]>(items);
+        }
+        catch (Exception ex)
+        {
+            return new ServiceActionResult<FetchedItemResponseModel[]>(
+                $"{ex.Message} : {await response.Content.ReadAsStringAsync()}");
+        }
     }
 
     public async ValueTask<ServiceActionResult<FetchedItemResponseModel>> GetItem(Guid id)
@@ -47,12 +45,13 @@ public sealed class ItemsService
         var response = await _httpClient.SendAsync(request);
 
         if (!response.IsSuccessStatusCode)
-            return new ServiceActionResult<FetchedItemResponseModel>(await response.Content.ReadAsStringAsync());
+            return new ServiceActionResult<FetchedItemResponseModel>(
+                (await response.Content.ReadFromJsonAsync<string>())!);
 
         try
         {
             var item = await response.Content.ReadFromJsonAsync<FetchedItemResponseModel>();
-                
+
             if (item is null)
                 return new ServiceActionResult<FetchedItemResponseModel>("Failed to deserialize");
 
@@ -60,7 +59,8 @@ public sealed class ItemsService
         }
         catch (Exception ex)
         {
-            return new ServiceActionResult<FetchedItemResponseModel>(await response.Content.ReadAsStringAsync());
+            return new ServiceActionResult<FetchedItemResponseModel>(
+                $"{ex.Message} : {await response.Content.ReadAsStringAsync()}");
         }
     }
 
@@ -71,12 +71,13 @@ public sealed class ItemsService
         var response = await _httpClient.SendAsync(request);
 
         if (!response.IsSuccessStatusCode)
-            return new ServiceActionResult<FetchedItemResponseModel>(await response.Content.ReadAsStringAsync());
+            return new ServiceActionResult<FetchedItemResponseModel>(
+                (await response.Content.ReadFromJsonAsync<string>())!);
 
         try
         {
             var item = await response.Content.ReadFromJsonAsync<FetchedItemResponseModel>();
-                
+
             if (item is null)
                 return new ServiceActionResult<FetchedItemResponseModel>("Failed to deserialize");
 
@@ -84,7 +85,8 @@ public sealed class ItemsService
         }
         catch (Exception ex)
         {
-            return new ServiceActionResult<FetchedItemResponseModel>(await response.Content.ReadAsStringAsync());
+            return new ServiceActionResult<FetchedItemResponseModel>(
+                $"{ex.Message} : {await response.Content.ReadAsStringAsync()}");
         }
     }
 
@@ -98,12 +100,13 @@ public sealed class ItemsService
         var response = await _httpClient.SendAsync(request);
 
         if (!response.IsSuccessStatusCode)
-            return new ServiceActionResult<CreateItemResponseModel>(await response.Content.ReadAsStringAsync());
+            return new ServiceActionResult<CreateItemResponseModel>(
+                (await response.Content.ReadFromJsonAsync<string>())!);
 
         try
         {
             var item = await response.Content.ReadFromJsonAsync<CreateItemResponseModel[]>();
-                
+
             if (item is null)
                 return new ServiceActionResult<CreateItemResponseModel>("Failed to deserialize");
 
@@ -111,7 +114,8 @@ public sealed class ItemsService
         }
         catch (Exception ex)
         {
-            return new ServiceActionResult<CreateItemResponseModel>(await response.Content.ReadAsStringAsync());
+            return new ServiceActionResult<CreateItemResponseModel>(
+                $"{ex.Message} : {await response.Content.ReadAsStringAsync()}");
         }
     }
 }
