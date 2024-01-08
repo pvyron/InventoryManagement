@@ -40,10 +40,10 @@ namespace InMa.DataAccess.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventories", (string)null);
                 });
 
-            modelBuilder.Entity("InMa.DataAccess.Models.Item", b =>
+            modelBuilder.Entity("InMa.DataAccess.Models.ItemDbModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,21 +51,23 @@ namespace InMa.DataAccess.Migrations
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.Property<DateTimeOffset>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", (string)null);
                 });
 
             modelBuilder.Entity("InMa.DataAccess.Models.StorageUnit", b =>
@@ -80,12 +82,12 @@ namespace InMa.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StorageUnits");
+                    b.ToTable("StorageUnits", (string)null);
                 });
 
             modelBuilder.Entity("InMa.DataAccess.Models.Inventory", b =>
                 {
-                    b.HasOne("InMa.DataAccess.Models.Item", "Item")
+                    b.HasOne("InMa.DataAccess.Models.ItemDbModel", "Item")
                         .WithMany()
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)

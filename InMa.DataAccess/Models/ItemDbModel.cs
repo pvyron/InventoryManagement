@@ -11,10 +11,12 @@ public class ItemDbModel
 {
     public Guid Id { get; set; }
     
-    [Length(5, 100)]
+    [MinLength(5)]
+    [MaxLength(100)]
     public required string Name { get; set; }
     
-    [Length(1, 20)]
+    [MinLength(1)]
+    [MaxLength(20)]
     public required string CategoryName { get; set; }
 
     public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.UtcNow;

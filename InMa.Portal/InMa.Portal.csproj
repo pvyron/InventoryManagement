@@ -17,4 +17,9 @@
         <Link>.dockerignore</Link>
       </Content>
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\InMa.Contracts\InMa.Contracts.csproj" />
+      <ProjectReference Include="..\InMa.Core\InMa.Core.csproj" />
+    </ItemGroup>
 </Project>
