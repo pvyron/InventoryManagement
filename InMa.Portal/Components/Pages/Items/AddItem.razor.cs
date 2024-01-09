@@ -16,7 +16,7 @@ public partial class AddItem
     private string NewItemCategory { get; set; } = "";
     private bool CallingApi { get; set; } = false;
 
-    private async Task OnAdd(MouseEventArgs args)
+    private async Task AddButtonClicked(MouseEventArgs args)
     {
         try
         {
@@ -38,9 +38,9 @@ public partial class AddItem
             
             NewItemName = string.Empty;
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            var dialog = await DialogService.ShowWarningAsync(e.Message);
+            var dialog = await DialogService.ShowWarningAsync(ex.Message);
             await dialog.Result;
         }
         finally

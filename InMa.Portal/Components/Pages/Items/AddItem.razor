@@ -14,7 +14,7 @@
             <FluentTextField @bind-Value=@NewItemCategory style="width: 100%;" Label="Category"></FluentTextField>
         </FluentGridItem>
         <FluentGridItem xs="4">
-            <FluentButton Appearance="Appearance.Accent" OnClick="@OnAdd" Loading="@CallingApi" style="width: 100%;">Add</FluentButton>
+            <FluentButton Appearance="Appearance.Accent" OnClick="@AddButtonClicked" Loading="@CallingApi" style="width: 100%;">Add</FluentButton>
         </FluentGridItem>
     </FluentGrid>
     
