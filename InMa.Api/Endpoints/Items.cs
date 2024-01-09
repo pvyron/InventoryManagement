@@ -44,4 +44,14 @@ public static class Items
     {
         return await mediator.Send(new DeleteItemCommand(id), cancellationToken);
     }
+
+    public static async ValueTask<IResult> SearchItems(
+        [FromQuery] string? itemName,
+        [FromQuery] string? itemCategoryName,
+        [FromServices] IMediator mediator,
+        [FromServices] ILoggerFactory loggerFactory,
+        CancellationToken cancellationToken)
+    {
+        return await mediator.Send(new SearchItemsQuery(itemName, itemCategoryName), cancellationToken);
+    }
 }

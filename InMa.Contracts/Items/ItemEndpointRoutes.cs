@@ -6,4 +6,6 @@ public class ItemEndpointRoutes
     public const string Create = "api/Items";
     public const string Update = "api/Items/{id:Guid}";
     public const string Delete = "api/Items/{id:Guid}";
+    
+    public const string Search = "api/Items/Search";
 }

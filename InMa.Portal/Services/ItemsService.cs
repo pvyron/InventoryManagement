@@ -1,4 +1,5 @@
-﻿using InMa.Contracts.Items;
+﻿using System.Text;
+using InMa.Contracts.Items;
 using InMa.Core.Types;
 
 namespace InMa.Portal.Services;
@@ -115,6 +116,33 @@ public sealed class ItemsService
         catch (Exception ex)
         {
             return new ServiceActionResult<CreateItemResponseModel>(
+                $"{ex.Message} : {await response.Content.ReadAsStringAsync()}");
+        }
+    }
+
+    public async ValueTask<ServiceActionResult<FetchedItemResponseModel[]>> SearchItems(string? name,
+        string? categoryName)
+    {
+        HttpRequestMessage request = new(HttpMethod.Get, $"/api/items/search?itemName={name}&itemCategoryName={categoryName}");
+
+        var response = await _httpClient.SendAsync(request);
+
+        if (!response.IsSuccessStatusCode)
+            return new ServiceActionResult<FetchedItemResponseModel[]>(
+                (await response.Content.ReadFromJsonAsync<string>())!);
+
+        try
+        {
+            var items = await response.Content.ReadFromJsonAsync<FetchedItemResponseModel[]>();
+
+            if (items is null)
+                return new ServiceActionResult<FetchedItemResponseModel[]>("Failed to deserialize");
+
+            return new ServiceActionResult<FetchedItemResponseModel[]>(items);
+        }
+        catch (Exception ex)
+        {
+            return new ServiceActionResult<FetchedItemResponseModel[]>(
                 $"{ex.Message} : {await response.Content.ReadAsStringAsync()}");
         }
     }

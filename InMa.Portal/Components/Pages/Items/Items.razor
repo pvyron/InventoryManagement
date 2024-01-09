@@ -2,6 +2,46 @@
 @rendermode InteractiveServer
 
 <PageTitle>Items</PageTitle>
-<a href="/items/add">
-    <FluentButton IconStart="new Icons.Regular.Size16.Add()" Appearance="Appearance.Outline">New Item</FluentButton>
-</a>
+
+<FluentGrid Spacing="3" Justify="JustifyContent.FlexStart">
+    <FluentGridItem xs="6">
+        <!--Search data-->
+        <FluentGrid Spacing="2" Justify="JustifyContent.FlexStart">
+            <FluentGridItem xs="12">
+                <FluentTextField @bind-Value=@SearchName style="width: 100%;" Label="Name">
+
+                </FluentTextField>
+            </FluentGridItem>
+            <FluentGridItem xs="12">
+                <FluentTextField @bind-Value=@SearchCategory style="width: 100%;" Label="Category">
+
+                </FluentTextField>
+            </FluentGridItem>
+            <FluentGridItem xs="12" Justify="JustifyContent.FlexEnd">
+                <FluentButton Appearance="Appearance.Accent" OnClick="@SearchButtonClicked" Loading="@CallingApi" IconStart="new Icons.Regular.Size16.Search()">
+                    Search
+                </FluentButton>
+            </FluentGridItem>
+        </FluentGrid>
+    </FluentGridItem>
+    <FluentGridItem xs="6" Justify="JustifyContent.SpaceAround">
+        <a href="/items/add">
+            <FluentButton IconStart="new Icons.Regular.Size16.Add()" Appearance="Appearance.Outline">
+                New Item
+            </FluentButton>
+        </a>
+    </FluentGridItem>
+    
+    <FluentGridItem xs="12" Justify="JustifyContent.Center">
+        <FluentDataGrid Items="@FetchedItems" style="width: 100%">
+            <PropertyColumn Property="@(p => p.Id)"/>
+            <PropertyColumn Property="@(p => p.Name)" Sortable="true"/>
+            <PropertyColumn Property="@(p => p.CategoryName)" Sortable="true"/>
+            <PropertyColumn Property="@(p => p.DateCreated)" Format="yyyy-MM-dd" Sortable="true"/>
+        </FluentDataGrid>
+    </FluentGridItem>
+</FluentGrid>
+
+
+
+

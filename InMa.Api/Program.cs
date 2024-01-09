@@ -42,6 +42,8 @@ app.MapGet(InventoryEndpointRoutes.GetStorageUnits, Endpoints.GetStorageUnits);
 app.MapPost(InventoryEndpointRoutes.AddStorageUnit, Endpoints.AddStorageUnit);
 app.MapPost(InventoryEndpointRoutes.PostStorageCount, Endpoints.CountStorage);
 
+app.MapGet(ItemEndpointRoutes.Search, Items.SearchItems);
+
 app.MapGet(ItemEndpointRoutes.Get, Items.Get);
 app.MapPost(ItemEndpointRoutes.Create, Items.Create);
 app.MapPut(ItemEndpointRoutes.Update, Items.Update);
