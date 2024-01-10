@@ -9,7 +9,8 @@ const string api_url = "https://localhost:7100";
 
 HttpClient client = new()
 {
-    BaseAddress = new Uri(api_url)
+    BaseAddress = new Uri(api_url),
+    Timeout = TimeSpan.FromMinutes(10)
 };
 
 Faker faker = new();
