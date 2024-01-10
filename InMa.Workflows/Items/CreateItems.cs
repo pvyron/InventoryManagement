@@ -41,7 +41,7 @@ public sealed class CreateItemsCommandHandler : IRequestHandler<CreateItemsComma
         }
         catch (Exception ex)
         {
-            return Results.BadRequest(ex.Message);
+            return Results.BadRequest(ex.Message + Environment.NewLine + ex.InnerException?.Message);
         }
     }
 }

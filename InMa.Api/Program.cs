@@ -4,7 +4,6 @@ using InMa.Contracts.Inventory;
 using InMa.Contracts.Items;
 using InMa.DataAccess;
 using InMa.Logic;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

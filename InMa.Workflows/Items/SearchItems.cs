@@ -22,10 +22,10 @@ public sealed class SearchItemsQueryHandler : IRequestHandler<SearchItemsQuery, 
         var query = _dbContext.Items.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(request.Name))
-            query = query.Where(i => EF.Functions.Like(i.Name, $"%{request.Name!.Replace('*', '%')}%"));
+            query = query.Where(i => EF.Functions.Like(i.NameLookup, $"{request.Name!.ToLower().Replace('*', '%')}"));
         
         if (!string.IsNullOrWhiteSpace(request.CategoryName))
-            query = query.Where(i => EF.Functions.Like(i.CategoryName, $"%{request.CategoryName!.Replace('*', '%')}%"));
+            query = query.Where(i => EF.Functions.Like(i.CategoryNameLookup, $"{request.CategoryName!.ToLower().Replace('*', '%')}"));
 
         var items = await query.Select(i => new FetchedItemResponseModel(i.Id, i.Name, i.CategoryName, i.CreateDate)).ToListAsync(cancellationToken);
         
