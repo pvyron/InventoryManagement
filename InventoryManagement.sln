@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMa.Logic", "InMa.Logic\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InNa.Logic.Tests.Unit", "InNa.Logic.Tests.Unit\InNa.Logic.Tests.Unit.csproj", "{5917F6F4-0A2F-4D24-82D8-81C94C60573B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{E8568F3F-1764-47B3-9491-A55939A92BC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMa.Tools.Seeder", "InMa.Tools.Seeder\InMa.Tools.Seeder.csproj", "{8C854FCE-A175-45CD-B4FC-211F40123C4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +76,10 @@ Global
 		{5917F6F4-0A2F-4D24-82D8-81C94C60573B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5917F6F4-0A2F-4D24-82D8-81C94C60573B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5917F6F4-0A2F-4D24-82D8-81C94C60573B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C854FCE-A175-45CD-B4FC-211F40123C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C854FCE-A175-45CD-B4FC-211F40123C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C854FCE-A175-45CD-B4FC-211F40123C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C854FCE-A175-45CD-B4FC-211F40123C4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +94,6 @@ Global
 		{3DAB4C9C-F88E-4457-90C1-A9E5F7EE82EB} = {3DC93A50-679D-4427-B756-FD3458CDA054}
 		{15EFD7F2-D5F2-4EE7-AA45-DD041FFFCD50} = {3DC93A50-679D-4427-B756-FD3458CDA054}
 		{5917F6F4-0A2F-4D24-82D8-81C94C60573B} = {C71A7E3F-EC2D-4830-BD57-9E0D4CA635C6}
+		{8C854FCE-A175-45CD-B4FC-211F40123C4F} = {E8568F3F-1764-47B3-9491-A55939A92BC5}
 	EndGlobalSection
 EndGlobal
