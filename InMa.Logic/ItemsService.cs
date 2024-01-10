@@ -22,6 +22,17 @@ public sealed class ItemsService : IItemsService
         
         var createdItems = new List<CreatedItemData>();
 
+        var createItemsDataNames = createItemsData.Select(i => i.Name.ToLower());
+
+        if (await _dbContext.Items.AsNoTracking()
+                .AnyAsync(i => createItemsDataNames.Contains(i.NameLookup), cancellationToken))
+        {
+            var existingItemName = await _dbContext.Items.AsNoTracking()
+                .FirstOrDefaultAsync(i => createItemsDataNames.Contains(i.NameLookup), cancellationToken);
+            
+            return new ServiceActionResult<List<CreatedItemData>>($"Item with name {existingItemName!.Name} already exists!");
+        }
+        
         foreach (var createItemData in createItemsData)
         {
             if (createItemData.Name.Length < 5)
@@ -29,9 +40,6 @@ public sealed class ItemsService : IItemsService
             
             if (string.IsNullOrWhiteSpace(createItemData.CategoryName))
                 return new ServiceActionResult<List<CreatedItemData>>("Item category can't be empty!");
-            
-            if (await _dbContext.Items.AsNoTracking().AnyAsync(i => i.Name == createItemData.Name, cancellationToken))
-                return new ServiceActionResult<List<CreatedItemData>>($"Item with name {createItemData.Name} already exists!");
 
             var createdItem = _dbContext.Items.Add(new ItemDbModel
             {
